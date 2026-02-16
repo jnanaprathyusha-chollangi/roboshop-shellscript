@@ -68,9 +68,3 @@ systemctl daemon-reload
 systemctl enable catalogue &>>$LOGS_FILE
 systemctl start 
 VALIDATE $? "starting and enabling catalogue"
-
-cp $SCRIPT_DIR/mongo.repo /etc/yum.repos.d/mongo.repo
-
-dnf install mongodb-mongosh -y 
-
-mongosh --host $MONGODB_HOST </app/db/master-data.js
