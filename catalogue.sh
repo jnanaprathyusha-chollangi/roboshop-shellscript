@@ -67,5 +67,5 @@ VALIDATE $? "Created systemctl service"
 
 systemctl daemon-reload
 systemctl enable catalogue &>>$LOGS_FILE
-systemctl start 
+systemctl start catalogue
 VALIDATE $? "starting and enabling catalogue"
