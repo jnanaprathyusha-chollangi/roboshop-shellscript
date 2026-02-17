@@ -50,22 +50,22 @@ VALIDATE $? "Creating app directroy"
 curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue-v3.zip &>>$LOGS_FILE
 VALIDATE $? "Downloading catalogue code"
 
-#cd /app
-#VALIDATE $? "Moving to app directory" 
+cd /app
+VALIDATE $? "Moving to app directory" 
 
 #rm -rf /app/*
 #VALIDATE $? "Removing existing code"
 
-#unzip /tmp/catalogue.zip &>>$LOGS_FILE
-#VALIDATE $? "unzip catalogue code"
+unzip /tmp/catalogue.zip &>>$LOGS_FILE
+VALIDATE $? "unzip catalogue code"
 
-#npm install &>>$LOGS_FILE
-#VALIDATE $? "Install Dependenices"
+npm install &>>$LOGS_FILE ## you can write, if node js is install are not if not install , if yes install..
+VALIDATE $? "Install Dependenices"
 
-#cp $SCRIPT_DIR/catalogue-service /etc/systemd/system/catalogue.service
-#VALIDATE $? "Created systemctl service"
+cp $SCRIPT_DIR/catalogue.service /etc/systemd/system/catalogue.service
+VALIDATE $? "Created systemctl service"
 
-#systemctl daemon-reload
-#systemctl enable catalogue &>>$LOGS_FILE
-#systemctl start 
-#VALIDATE $? "starting and enabling catalogue"
+systemctl daemon-reload
+systemctl enable catalogue &>>$LOGS_FILE
+systemctl start 
+VALIDATE $? "starting and enabling catalogue"
