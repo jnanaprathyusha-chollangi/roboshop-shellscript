@@ -40,12 +40,12 @@ VALIDATE $? "Revoming the defalut content"
 
 curl -o /tmp/frontend.zip https://roboshop-artifacts.s3.amazonaws.com/frontend-v3.zip
 cd /usr/share/nginx/html 
-unzip /tmp/frontend.zip
+unzip /tmp/frontend.zip &>>$LOGS_FILE
 VALIDATE $? "Downloaded and unzipped frontend"
 
 rm -rf /etc/nginx/nginx.conf
 
-cp $SCRIPT_DIR/nginx.conf / etc/nginx/nginx.conf
+cp $SCRIPT_DIR/nginx.conf / etc/nginx/nginx.conf &>>$LOGS_FILE
 VALIDATE $? "Copied our nginx conf file"
 
 
