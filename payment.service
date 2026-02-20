@@ -9,7 +9,7 @@ Environment=CART_HOST=cart.devopsd88s.online
 Environment=CART_PORT=8080
 Environment=USER_HOST=user.devopsd88s.online
 Environment=USER_PORT=8080
-Environment=AMQP_HOST=redis.devopsd88s.online
+Environment=AMQP_HOST=rabbitmq.devopsd88s.online
 // highlight-end
 Environment=AMQP_USER=roboshop
 Environment=AMQP_PASS=roboshop123
