@@ -38,6 +38,6 @@ VALIDATE $? "starting the mysql"
 
 #get the password from the root user
 mysql_secure_installation --set-root-pass RoboShop@1
-VALIDATE $? "Set up root password"
+VALIDATE $? "Setup root password"
 
 
