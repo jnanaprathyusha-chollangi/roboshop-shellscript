@@ -2,13 +2,12 @@
 
 SG_ID = "sg-059610db1385bb7db"
 AMI_ID = "ami-0220d79f3f480ecf5"
-instance_id = "i-039ccb02d1c79abfc"
-ZONE_ID = Z10250571FYTWGH7ZIEN
-DOMAIN_NAME = devopsd88s.online
+ZONE_ID = "Z10250571FYTWGH7ZIEN"
+DOMAIN_NAME = "devopsd88s.online"
 
 for instance in $@
 do
-    instance_id = $(aws ec2 run-instances \
+    INSTANCE_ID=$(aws ec2 run-instances \
     --image-id $AMI_ID \
     --instance-type t3.micro \
     --security-group-ids $SG_ID \
@@ -18,13 +17,13 @@ do
 
     if [ $instance == "frontend" ]; then
         IP = $( aws ec2 describe-instances \
-            --instance-ids $instance_id \
+            --instance-ids $INSTANCE_ID \
             --query 'Reservations[*].Instances[*].PublicIpAddress' \
             --output text)
         RECORD_NAME = "$DOMAIN_NAME" #devopsd88s.online
     else
         IP = $( aws ec2 describe-instances \
-            --instance-ids $instance_id \
+            --instance-ids $INSTANCE_ID \
             --query 'Reservations[*].Instances[*].PrivateIpAddress' \
             --output text)
         RECORD_NAME = "$instance.DOMAIN_NAME" #Mongodb.devopsd88s.online
@@ -52,5 +51,5 @@ do
         ]
     }
    '
-
+    echo "record updated for $instance"
 done
