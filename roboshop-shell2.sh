@@ -1,9 +1,9 @@
 #!/bin/bash
 
-SG_ID = "sg-059610db1385bb7db"
-AMI_ID = "ami-0220d79f3f480ecf5"
-ZONE_ID = "Z10250571FYTWGH7ZIEN"
-DOMAIN_NAME = "devopsd88s.online"
+SG_ID="sg-059610db1385bb7db"
+AMI_ID="ami-0220d79f3f480ecf5"
+ZONE_ID="Z10250571FYTWGH7ZIEN"
+DOMAIN_NAME="devopsd88s.online"
 
 for instance in $@
 do
