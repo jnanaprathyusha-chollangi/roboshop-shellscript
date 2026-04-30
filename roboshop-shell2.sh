@@ -12,7 +12,7 @@ do
     --instance-type t3.micro \
     --security-group-ids $SG_ID \
     --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=$instance}]' \
-    --query 'Instances[0].PrivateIpAddress' \
+    --query 'Instances[0].InstanceId' \
     --output text)
 
     if [ $instance == "frontend" ]; then
@@ -25,7 +25,7 @@ do
     else
         IP=$( aws ec2 describe-instances \
             --instance-ids $INSTANCE_ID \
-            --query 'Reservations[*].Instances[*].PrivateIpAddress' \
+            --query 'Reservations[].Instances[].PrivateIpAddress' \
             --output text)
         RECORD_NAME="$instance.DOMAIN_NAME" #Mongodb.devopsd88s.online
     fi
