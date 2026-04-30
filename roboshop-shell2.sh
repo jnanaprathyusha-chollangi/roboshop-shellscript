@@ -16,17 +16,17 @@ do
     --output text)
 
     if [ $instance == "frontend" ]; then
-        IP = $( aws ec2 describe-instances \
+        IP=$( aws ec2 describe-instances \
             --instance-ids $INSTANCE_ID \
             --query 'Reservations[*].Instances[*].PublicIpAddress' \
             --output text)
-        RECORD_NAME = "$DOMAIN_NAME" #devopsd88s.online
+        RECORD_NAME="$DOMAIN_NAME" #devopsd88s.online
     else
-        IP = $( aws ec2 describe-instances \
+        IP=$( aws ec2 describe-instances \
             --instance-ids $INSTANCE_ID \
             --query 'Reservations[*].Instances[*].PrivateIpAddress' \
             --output text)
-        RECORD_NAME = "$instance.DOMAIN_NAME" #Mongodb.devopsd88s.online
+        RECORD_NAME="$instance.DOMAIN_NAME" #Mongodb.devopsd88s.online
     fi
     echo "ID Address: $IP"
      aws route53 change-resource-record-sets \
@@ -38,7 +38,7 @@ do
             {
                 "Action": "UPSERT",
                 "ResourceRecordSet": {
-                    "Name": "'RECORD_NAME'",
+                    "Name": "'$RECORD_NAME'",
                     "Type": "A",
                     "TTL": 1,
                     "ResourceRecords": [
