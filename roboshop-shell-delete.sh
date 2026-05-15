@@ -20,19 +20,11 @@ do
     
 done
 
-CHANGE_BATCH=$(aws route53 list-resource-record-sets \
+aws route53 change-resource-record-sets \
     --hosted-zone-id $ZONE_ID \
-    --query "ResourceRecordSets[?Type!='NS' && Type!='SOA']" \
-    --output json | jq '{Changes: map({Action: "DELETE", ResourceRecordSet: .})}')
-
-CHANGES_COUNT=$(echo "$CHANGE_BATCH" | jq '.Changes | length')
-
-if [ "$CHANGES_COUNT" -eq 0 ]; then
-    echo "No Route53 records to delete"
-else
-    aws route53 change-resource-record-sets \
+    --change-batch "$(aws route53 list-resource-record-sets \
         --hosted-zone-id $ZONE_ID \
-        --change-batch "$CHANGE_BATCH"
+        --query "ResourceRecordSets[?Type!='NS' && Type!='SOA']" \
+        --output json | jq '{Changes: map({Action: "DELETE", ResourceRecordSet: .})}')"
 
-    echo "Deleted all Route53 records except NS and SOA"
-fi
+echo "Deleted all R53 Records other than NS and SOA Types"
