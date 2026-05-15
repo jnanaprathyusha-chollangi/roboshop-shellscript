@@ -5,13 +5,13 @@ for instance in $@
 do 
     INSTANCE_IDS=$(aws ec2 describe-instances \
         --filters \
-        "Name=tag:Name,Values=$NAME" \
+        "Name=tag:Name,Values=$instance" \
         "Name=instance-state-name,Values=running" \
         --query "Reservations[].Instances[].InstanceId" \
         --output text)
 
     if [ -z "$INSTANCE_IDS" ] ; then
-        echo "No running instance found with name: $NAME"
+        echo "No running instance found with name: $instance"
         exit 1
     else
         echo "Terminating instances: $INSTANCE_IDS"
