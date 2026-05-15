@@ -1,5 +1,5 @@
 #!/bin/bash
-ZONE_ID=Z10250571FYTWGH7ZIEN
+ZONE_ID="Z10250571FYTWGH7ZIEN"
 
 for instance in $@
 do 
